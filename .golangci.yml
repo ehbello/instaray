@@ -1,17 +1,14 @@
+version: "2"
 linters:
   enable:
     - errcheck
-    - gosimple
     - govet
     - ineffassign
     - staticcheck
     - unused
-    - gofmt
     - godot
+formatters:
+  enable:
+    - gofmt
 run:
   timeout: 5m
-  modules:
-    enable: true
-output:
-  formats:
-    - format: colored-line-number

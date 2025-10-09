@@ -99,9 +99,9 @@ func New() *Config {
 	// NOTE: This can't handle multi-word environment variables like TELEGRAM_SECRET_KEY
 	// See: https://github.com/knadh/koanf/issues/295
 	prefix := strings.ToUpper(AppName)
-	if err := k.Load(env.ProviderWithValue(prefix, ".", func(s string, v string) (string, interface{}) {
+	if err := k.Load(env.ProviderWithValue(prefix, ".", func(s string, v string) (string, any) {
 		// Strip out the prefix, lowercase and using . as key delimiter.
-		key := strings.Replace(strings.ToLower(strings.TrimPrefix(s, prefix+"_")), "_", ".", -1)
+		key := strings.ReplaceAll(strings.ToLower(strings.TrimPrefix(s, prefix+"_")), "_", ".")
 		// Split comma-separated values into a slice.
 		if strings.Contains(v, ",") {
 			return key, strings.Split(v, ",")
